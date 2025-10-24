@@ -1,5 +1,10 @@
 # Cancer Survival Prediction Companion
 
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+[![Not for Clinical Use](https://img.shields.io/badge/⚠️_Not_for_Clinical_Use-Educational_Only-red.svg)](https://github.com/Gururaj-GJ/Cancer-Survival-Prediction-Companion)
+[![Privacy](https://img.shields.io/badge/Privacy-No_Data_Storage-blue.svg)](https://github.com/Gururaj-GJ/Cancer-Survival-Prediction-Companion)
+[![Offline](https://img.shields.io/badge/Works-Offline-brightgreen.svg)](https://github.com/Gururaj-GJ/Cancer-Survival-Prediction-Companion)
+
 ## 📋 Table of Contents
 - [Project Overview](#-project-overview)
 - [How It Works](#-how-it-works)
@@ -368,6 +373,8 @@ The predictions provided are statistical estimates based on historical data and 
 
 **Remember**: Behind every data point is a human being with hopes, fears, and loved ones. This tool aims to serve with compassion, accuracy, and respect for human dignity.
 
-For questions, feedback, or collaboration: [Your Contact Information]
+For questions, feedback, or collaboration: [
+- **Email**: gururaj.gj.guru@gmail.com
+- **LinkedIn**: [linkedin.com/in/gururaj-gj](https://www.linkedin.com/in/gururaj-gj/)
 
 *Last Updated: October 2025*
