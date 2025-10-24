@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancer Survival Prediction Companion</title>
+    <style>
+        :root {
+  /* Primitive Color Tokens */
+  --color-white: rgba(255, 255, 255, 1);
+  --color-black: rgba(0, 0, 0, 1);
+  --color-cream-50: rgba(252, 252, 249, 1);
+  --color-cream-100: rgba(255, 255, 253, 1);
+  --color-gray-200: rgba(245, 245, 245, 1);
+  --color-gray-300: rgba(167, 169, 169, 1);
+  --color-gray-400: rgba(119, 124, 124, 1);
+  --color-slate-500: rgba(98, 108, 113, 1);
+  --color-brown-600: rgba(94, 82, 64, 1);
+  --color-charcoal-700: rgba(31, 33, 33, 1);
+  --color-charcoal-800: rgba(38, 40, 40, 1);
+  --color-slate-900: rgba(19, 52, 59, 1);
+  --color-teal-300: rgba(50, 184, 198, 1);
+  --color-teal-400: rgba(45, 166, 178, 1);
+  --color-teal-500: rgba(33, 128, 141, 1);
+  --color-teal-600: rgba(29, 116, 128, 1);
+  --color-teal-700: rgba(26, 104, 115, 1);
+  --color-teal-800: rgba(41, 150, 161, 1);
+  --color-red-400: rgba(255, 84, 89, 1);
+  --color-red-500: rgba(192, 21, 47, 1);
+  --color-orange-400: rgba(230, 129, 97, 1);
+  --color-orange-500: rgba(168, 75, 47, 1);
+
+  /* RGB versions for opacity control */
+  --color-brown-600-rgb: 94, 82, 64;
+  --color-teal-500-rgb: 33, 128, 141;
+  --color-slate-900-rgb: 19, 52, 59;
+  --color-slate-500-rgb: 98, 108, 113;
+  --color-red-500-rgb: 192, 21, 47;
+  --color-red-400-rgb: 255, 84, 89;
+  --color-orange-500-rgb: 168, 75, 47;
+  --color-orange-400-rgb: 230, 129, 97;
+
+  /* Background color tokens (Light Mode) */
+  --color-bg-1: rgba(59, 130, 246, 0.08); /* Light blue */
+  --color-bg-2: rgba(245, 158, 11, 0.08); /* Light yellow */
+  --color-bg-3: rgba(34, 197, 94, 0.08); /* Light green */
+  --color-bg-4: rgba(239, 68, 68, 0.08); /* Light red */
+  --color-bg-5: rgba(147, 51, 234, 0.08); /* Light purple */
+  --color-bg-6: rgba(249, 115, 22, 0.08); /* Light orange */
+  --color-bg-7: rgba(236, 72, 153, 0.08); /* Light pink */
+  --color-bg-8: rgba(6, 182, 212, 0.08); /* Light cyan */
+
+  /* Semantic Color Tokens (Light Mode) */
+  --color-background: var(--color-cream-50);
+  --color-surface: var(--color-cream-100);
+  --color-text: var(--color-slate-900);
+  --color-text-secondary: var(--color-slate-500);
+  --color-primary: var(--color-teal-500);
+  --color-primary-hover: var(--color-teal-600);
+  --color-primary-active: var(--color-teal-700);
+  --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.25);
+  --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-btn-primary-text: var(--color-cream-50);
+  --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-card-border-inner: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-error: var(--color-red-500);
+  --color-success: var(--color-teal-500);
+  --color-warning: var(--color-orange-500);
+  --color-info: var(--color-slate-500);
+  --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.4);
+  --color-select-caret: rgba(var(--color-slate-900-rgb), 0.8);
+
+  /* Common style patterns */
+  --focus-ring: 0 0 0 3px var(--color-focus-ring);
+  --focus-outline: 2px solid var(--color-primary);
+  --status-bg-opacity: 0.15;
+  --status-border-opacity: 0.25;
+  --select-caret-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23134252' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  --select-caret-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23f5f5f5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+
+  /* RGB versions for opacity control */
+  --color-success-rgb: 33, 128, 141;
+  --color-error-rgb: 192, 21, 47;
+  --color-warning-rgb: 168, 75, 47;
+  --color-info-rgb: 98, 108, 113;
+
+  /* Typography */
+  --font-family-base: "FKGroteskNeue", "Geist", "Inter", -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-family-mono: "Berkeley Mono", ui-monospace, SFMono-Regular, Menlo,
+    Monaco, Consolas, monospace;
+  --font-size-xs: 11px;
+  --font-size-sm: 12px;
+  --font-size-base: 14px;
+  --font-size-md: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 18px;
+  --font-size-2xl: 20px;
+  --font-size-3xl: 24px;
+  --font-size-4xl: 30px;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 550;
+  --font-weight-bold: 600;
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --letter-spacing-tight: -0.01em;
+
+  /* Spacing */
+  --space-0: 0;
+  --space-1: 1px;
+  --space-2: 2px;
+  --space-4: 4px;
+  --space-6: 6px;
+  --space-8: 8px;
+  --space-10: 10px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-base: 8px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04),
+    0 2px 4px -1px rgba(0, 0, 0, 0.02);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.04),
+    0 4px 6px -2px rgba(0, 0, 0, 0.02);
+  --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.03);
+
+  /* Animation */
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Layout */
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+}
+
+/* Dark mode colors */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* RGB versions for opacity control (Dark Mode) */
+    --color-gray-400-rgb: 119, 124, 124;
+    --color-teal-300-rgb: 50, 184, 198;
+    --color-gray-300-rgb: 167, 169, 169;
+    --color-gray-200-rgb: 245, 245, 245;
+
+    /* Background color tokens (Dark Mode) */
+    --color-bg-1: rgba(29, 78, 216, 0.15); /* Dark blue */
+    --color-bg-2: rgba(180, 83, 9, 0.15); /* Dark yellow */
+    --color-bg-3: rgba(21, 128, 61, 0.15); /* Dark green */
+    --color-bg-4: rgba(185, 28, 28, 0.15); /* Dark red */
+    --color-bg-5: rgba(107, 33, 168, 0.15); /* Dark purple */
+    --color-bg-6: rgba(194, 65, 12, 0.15); /* Dark orange */
+    --color-bg-7: rgba(190, 24, 93, 0.15); /* Dark pink */
+    --color-bg-8: rgba(8, 145, 178, 0.15); /* Dark cyan */
+
+    /* Semantic Color Tokens (Dark Mode) */
+    --color-background: var(--color-charcoal-700);
+    --color-surface: var(--color-charcoal-800);
+    --color-text: var(--color-gray-200);
+    --color-text-secondary: rgba(var(--color-gray-300-rgb), 0.7);
+    --color-primary: var(--color-teal-300);
+    --color-primary-hover: var(--color-teal-400);
+    --color-primary-active: var(--color-teal-800);
+    --color-secondary: rgba(var(--color-gray-400-rgb), 0.15);
+    --color-secondary-hover: rgba(var(--color-gray-400-rgb), 0.25);
+    --color-secondary-active: rgba(var(--color-gray-400-rgb), 0.3);
+    --color-border: rgba(var(--color-gray-400-rgb), 0.3);
+    --color-error: var(--color-red-400);
+    --color-success: var(--color-teal-300);
+    --color-warning: var(--color-orange-400);
+    --color-info: var(--color-gray-300);
+    --color-focus-ring: rgba(var(--color-teal-300-rgb), 0.4);
+    --color-btn-primary-text: var(--color-slate-900);
+    --color-card-border: rgba(var(--color-gray-400-rgb), 0.2);
+    --color-card-border-inner: rgba(var(--color-gray-400-rgb), 0.15);
+    --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+    --button-border-secondary: rgba(var(--color-gray-400-rgb), 0.2);
+    --color-border-secondary: rgba(var(--color-gray-400-rgb), 0.2);
+    --color-select-caret: rgba(var(--color-gray-200-rgb), 0.8);
+
+    /* Common style patterns - updated for dark mode */
+    --focus-ring: 0 0 0 3px var(--color-focus-ring);
+    --focus-outline: 2px solid var(--color-primary);
+    --status-bg-opacity: 0.15;
+    --status-border-opacity: 0.25;
+    --select-caret-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23134252' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    --select-caret-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23f5f5f5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+
+    /* RGB versions for dark mode */
+    --color-success-rgb: var(--color-teal-300-rgb);
+    --color-error-rgb: var(--color-red-400-rgb);
+    --color-warning-rgb: var(--color-orange-400-rgb);
+    --color-info-rgb: var(--color-gray-300-rgb);
+  }
+}
+
+/* Data attribute for manual theme switching */
+[data-color-scheme="dark"] {
+  /* RGB versions for opacity control (dark mode) */
+  --color-gray-400-rgb: 119, 124, 124;
+  --color-teal-300-rgb: 50, 184, 198;
+  --color-gray-300-rgb: 167, 169, 169;
+  --color-gray-200-rgb: 245, 245, 245;
+
+  /* Colorful background palette - Dark Mode */
+  --color-bg-1: rgba(29, 78, 216, 0.15); /* Dark blue */
+  --color-bg-2: rgba(180, 83, 9, 0.15); /* Dark yellow */
+  --color-bg-3: rgba(21, 128, 61, 0.15); /* Dark green */
+  --color-bg-4: rgba(185, 28, 28, 0.15); /* Dark red */
+  --color-bg-5: rgba(107, 33, 168, 0.15); /* Dark purple */
+  --color-bg-6: rgba(194, 65, 12, 0.15); /* Dark orange */
+  --color-bg-7: rgba(190, 24, 93, 0.15); /* Dark pink */
+  --color-bg-8: rgba(8, 145, 178, 0.15); /* Dark cyan */
+
+  /* Semantic Color Tokens (Dark Mode) */
+  --color-background: var(--color-charcoal-700);
+  --color-surface: var(--color-charcoal-800);
+  --color-text: var(--color-gray-200);
+  --color-text-secondary: rgba(var(--color-gray-300-rgb), 0.7);
+  --color-primary: var(--color-teal-300);
+  --color-primary-hover: var(--color-teal-400);
+  --color-primary-active: var(--color-teal-800);
+  --color-secondary: rgba(var(--color-gray-400-rgb), 0.15);
+  --color-secondary-hover: rgba(var(--color-gray-400-rgb), 0.25);
+  --color-secondary-active: rgba(var(--color-gray-400-rgb), 0.3);
+  --color-border: rgba(var(--color-gray-400-rgb), 0.3);
+  --color-error: var(--color-red-400);
+  --color-success: var(--color-teal-300);
+  --color-warning: var(--color-orange-400);
+  --color-info: var(--color-gray-300);
+  --color-focus-ring: rgba(var(--color-teal-300-rgb), 0.4);
+  --color-btn-primary-text: var(--color-slate-900);
+  --color-card-border: rgba(var(--color-gray-400-rgb), 0.15);
+  --color-card-border-inner: rgba(var(--color-gray-400-rgb), 0.15);
+  --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  --color-border-secondary: rgba(var(--color-gray-400-rgb), 0.2);
+  --color-select-caret: rgba(var(--color-gray-200-rgb), 0.8);
+
+  /* Common style patterns - updated for dark mode */
+  --focus-ring: 0 0 0 3px var(--color-focus-ring);
+  --focus-outline: 2px solid var(--color-primary);
+  --status-bg-opacity: 0.15;
+  --status-border-opacity: 0.25;
+  --select-caret-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23134252' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  --select-caret-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23f5f5f5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+
+  /* RGB versions for dark mode */
+  --color-success-rgb: var(--color-teal-300-rgb);
+  --color-error-rgb: var(--color-red-400-rgb);
+  --color-warning-rgb: var(--color-orange-400-rgb);
+  --color-info-rgb: var(--color-gray-300-rgb);
+}
+
+[data-color-scheme="light"] {
+  /* RGB versions for opacity control (light mode) */
+  --color-brown-600-rgb: 94, 82, 64;
+  --color-teal-500-rgb: 33, 128, 141;
+  --color-slate-900-rgb: 19, 52, 59;
+
+  /* Semantic Color Tokens (Light Mode) */
+  --color-background: var(--color-cream-50);
+  --color-surface: var(--color-cream-100);
+  --color-text: var(--color-slate-900);
+  --color-text-secondary: var(--color-slate-500);
+  --color-primary: var(--color-teal-500);
+  --color-primary-hover: var(--color-teal-600);
+  --color-primary-active: var(--color-teal-700);
+  --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.25);
+  --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-btn-primary-text: var(--color-cream-50);
+  --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-card-border-inner: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-error: var(--color-red-500);
+  --color-success: var(--color-teal-500);
+  --color-warning: var(--color-orange-500);
+  --color-info: var(--color-slate-500);
+  --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.4);
+
+  /* RGB versions for light mode */
+  --color-success-rgb: var(--color-teal-500-rgb);
+  --color-error-rgb: var(--color-red-500-rgb);
+  --color-warning-rgb: var(--color-orange-500-rgb);
+  --color-info-rgb: var(--color-slate-500-rgb);
+}
+
+/* Base styles */
+html {
+  font-size: var(--font-size-base);
+  font-family: var(--font-family-base);
+  line-height: var(--line-height-normal);
+  color: var(--color-text);
+  background-color: var(--color-background);
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  color: var(--color-text);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+h1 {
+  font-size: var(--font-size-4xl);
+}
+h2 {
+  font-size: var(--font-size-3xl);
+}
+h3 {
+  font-size: var(--font-size-2xl);
+}
+h4 {
+  font-size: var(--font-size-xl);
+}
+h5 {
+  font-size: var(--font-size-lg);
+}
+h6 {
+  font-size: var(--font-size-md);
+}
+
+p {
+  margin: 0 0 var(--space-16) 0;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+a:hover {
+  color: var(--color-primary-hover);
+}
+
+code,
+pre {
+  font-family: var(--font-family-mono);
+  font-size: calc(var(--font-size-base) * 0.95);
+  background-color: var(--color-secondary);
+  border-radius: var(--radius-sm);
+}
+
+code {
+  padding: var(--space-1) var(--space-4);
+}
+
+pre {
+  padding: var(--space-16);
+  margin: var(--space-16) 0;
+  overflow: auto;
+  border: 1px solid var(--color-border);
+}
+
+pre code {
+  background: none;
+  padding: 0;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8) var(--space-16);
+  border-radius: var(--radius-base);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: all var(--duration-normal) var(--ease-standard);
+  border: none;
+  text-decoration: none;
+  position: relative;
+}
+
+.btn:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.btn--primary {
+  background: var(--color-primary);
+  color: var(--color-btn-primary-text);
+}
+
+.btn--primary:hover {
+  background: var(--color-primary-hover);
+}
+
+.btn--primary:active {
+  background: var(--color-primary-active);
+}
+
+.btn--secondary {
+  background: var(--color-secondary);
+  color: var(--color-text);
+}
+
+.btn--secondary:hover {
+  background: var(--color-secondary-hover);
+}
+
+.btn--secondary:active {
+  background: var(--color-secondary-active);
+}
+
+.btn--outline {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+}
+
+.btn--outline:hover {
+  background: var(--color-secondary);
+}
+
+.btn--sm {
+  padding: var(--space-4) var(--space-12);
+  font-size: var(--font-size-sm);
+  border-radius: var(--radius-sm);
+}
+
+.btn--lg {
+  padding: var(--space-10) var(--space-20);
+  font-size: var(--font-size-lg);
+  border-radius: var(--radius-md);
+}
+
+.btn--full-width {
+  width: 100%;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Form elements */
+.form-control {
+  display: block;
+  width: 100%;
+  padding: var(--space-8) var(--space-12);
+  font-size: var(--font-size-md);
+  line-height: 1.5;
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-base);
+  transition: border-color var(--duration-fast) var(--ease-standard),
+    box-shadow var(--duration-fast) var(--ease-standard);
+}
+
+textarea.form-control {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+}
+
+select.form-control {
+  padding: var(--space-8) var(--space-12);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: var(--select-caret-light);
+  background-repeat: no-repeat;
+  background-position: right var(--space-12) center;
+  background-size: 16px;
+  padding-right: var(--space-32);
+}
+
+/* Add a dark mode specific caret */
+@media (prefers-color-scheme: dark) {
+  select.form-control {
+    background-image: var(--select-caret-dark);
+  }
+}
+
+/* Also handle data-color-scheme */
+[data-color-scheme="dark"] select.form-control {
+  background-image: var(--select-caret-dark);
+}
+
+[data-color-scheme="light"] select.form-control {
+  background-image: var(--select-caret-light);
+}
+
+.form-control:focus {
+  border-color: var(--color-primary);
+  outline: var(--focus-outline);
+}
+
+.form-label {
+  display: block;
+  margin-bottom: var(--space-8);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm);
+}
+
+.form-group {
+  margin-bottom: var(--space-16);
+}
+
+/* Card component */
+.card {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-card-border);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: box-shadow var(--duration-normal) var(--ease-standard);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.card__body {
+  padding: var(--space-16);
+}
+
+.card__header,
+.card__footer {
+  padding: var(--space-16);
+  border-bottom: 1px solid var(--color-card-border-inner);
+}
+
+/* Status indicators - simplified with CSS variables */
+.status {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-6) var(--space-12);
+  border-radius: var(--radius-full);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm);
+}
+
+.status--success {
+  background-color: rgba(
+    var(--color-success-rgb, 33, 128, 141),
+    var(--status-bg-opacity)
+  );
+  color: var(--color-success);
+  border: 1px solid
+    rgba(var(--color-success-rgb, 33, 128, 141), var(--status-border-opacity));
+}
+
+.status--error {
+  background-color: rgba(
+    var(--color-error-rgb, 192, 21, 47),
+    var(--status-bg-opacity)
+  );
+  color: var(--color-error);
+  border: 1px solid
+    rgba(var(--color-error-rgb, 192, 21, 47), var(--status-border-opacity));
+}
+
+.status--warning {
+  background-color: rgba(
+    var(--color-warning-rgb, 168, 75, 47),
+    var(--status-bg-opacity)
+  );
+  color: var(--color-warning);
+  border: 1px solid
+    rgba(var(--color-warning-rgb, 168, 75, 47), var(--status-border-opacity));
+}
+
+.status--info {
+  background-color: rgba(
+    var(--color-info-rgb, 98, 108, 113),
+    var(--status-bg-opacity)
+  );
+  color: var(--color-info);
+  border: 1px solid
+    rgba(var(--color-info-rgb, 98, 108, 113), var(--status-border-opacity));
+}
+
+/* Container layout */
+.container {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: var(--space-16);
+  padding-left: var(--space-16);
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: var(--container-sm);
+  }
+}
+@media (min-width: 768px) {
+  .container {
+    max-width: var(--container-md);
+  }
+}
+@media (min-width: 1024px) {
+  .container {
+    max-width: var(--container-lg);
+  }
+}
+@media (min-width: 1280px) {
+  .container {
+    max-width: var(--container-xl);
+  }
+}
+
+/* Utility classes */
+.flex {
+  display: flex;
+}
+.flex-col {
+  flex-direction: column;
+}
+.items-center {
+  align-items: center;
+}
+.justify-center {
+  justify-content: center;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.gap-4 {
+  gap: var(--space-4);
+}
+.gap-8 {
+  gap: var(--space-8);
+}
+.gap-16 {
+  gap: var(--space-16);
+}
+
+.m-0 {
+  margin: 0;
+}
+.mt-8 {
+  margin-top: var(--space-8);
+}
+.mb-8 {
+  margin-bottom: var(--space-8);
+}
+.mx-8 {
+  margin-left: var(--space-8);
+  margin-right: var(--space-8);
+}
+.my-8 {
+  margin-top: var(--space-8);
+  margin-bottom: var(--space-8);
+}
+
+.p-0 {
+  padding: 0;
+}
+.py-8 {
+  padding-top: var(--space-8);
+  padding-bottom: var(--space-8);
+}
+.px-8 {
+  padding-left: var(--space-8);
+  padding-right: var(--space-8);
+}
+.py-16 {
+  padding-top: var(--space-16);
+  padding-bottom: var(--space-16);
+}
+.px-16 {
+  padding-left: var(--space-16);
+  padding-right: var(--space-16);
+}
+
+.block {
+  display: block;
+}
+.hidden {
+  display: none;
+}
+
+/* Accessibility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: 2px;
+}
+
+/* Dark mode specifics */
+[data-color-scheme="dark"] .btn--outline {
+  border: 1px solid var(--color-border-secondary);
+}
+
+@font-face {
+  font-family: 'FKGroteskNeue';
+  src: url('https://r2cdn.perplexity.ai/fonts/FKGroteskNeue.woff2')
+    format('woff2');
+}
+
+/* END PERPLEXITY DESIGN SYSTEM */
+
+        /* Custom styles for CSPS */
+        .memorial-note {
+            background: var(--color-bg-3);
+            padding: var(--space-16);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--color-success);
+            margin: var(--space-16) 0;
+            text-align: center;
+        }
+        
+        .disclaimer {
+            background: var(--color-bg-2);
+            padding: var(--space-16);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--color-warning);
+            margin: var(--space-16) 0;
+            font-size: var(--font-size-sm);
+        }
+        
+        .form-section {
+            background: var(--color-surface);
+            padding: var(--space-24);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-card-border);
+            margin: var(--space-16) 0;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-16);
+        }
+        
+        @media (max-width: 768px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .prediction-result {
+            background: var(--color-bg-1);
+            padding: var(--space-24);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-primary);
+            margin: var(--space-24) 0;
+        }
+        
+        .time-window {
+            background: var(--color-surface);
+            padding: var(--space-12);
+            border-radius: var(--radius-md);
+            margin: var(--space-8) 0;
+            border: 1px solid var(--color-card-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .time-window.highest {
+            background: var(--color-primary);
+            color: var(--color-btn-primary-text);
+        }
+        
+        .probability-bar {
+            height: 8px;
+            background: var(--color-secondary);
+            border-radius: var(--radius-full);
+            overflow: hidden;
+            margin: var(--space-8) 0;
+        }
+        
+        .probability-fill {
+            height: 100%;
+            background: var(--color-primary);
+            transition: width var(--duration-normal) var(--ease-standard);
+        }
+        
+        .comfort-measures {
+            background: var(--color-bg-3);
+            padding: var(--space-24);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-success);
+            margin: var(--space-24) 0;
+        }
+        
+        .comfort-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .comfort-list li {
+            padding: var(--space-8) 0;
+            border-bottom: 1px solid rgba(var(--color-success-rgb), 0.2);
+        }
+        
+        .comfort-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .confidence-indicator {
+            display: flex;
+            align-items: center;
+            gap: var(--space-8);
+            margin: var(--space-16) 0;
+        }
+        
+        .confidence-dots {
+            display: flex;
+            gap: var(--space-4);
+        }
+        
+        .confidence-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--color-secondary);
+        }
+        
+        .confidence-dot.filled {
+            background: var(--color-primary);
+        }
+        
+        .emergency-contact {
+            background: var(--color-bg-4);
+            padding: var(--space-16);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--color-error);
+            margin: var(--space-16) 0;
+        }
+        
+        .footer-section {
+            background: var(--color-surface);
+            padding: var(--space-24);
+            border-top: 1px solid var(--color-card-border);
+            margin-top: var(--space-32);
+        }
+        
+        .support-resources {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-16);
+            margin: var(--space-16) 0;
+        }
+        
+        .resource-card {
+            background: var(--color-surface);
+            padding: var(--space-16);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--color-card-border);
+        }
+        
+        .loading-state {
+            text-align: center;
+            padding: var(--space-24);
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: var(--space-8);
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--color-primary);
+        }
+        
+        .scale-description {
+            font-size: var(--font-size-xs);
+            color: var(--color-text-secondary);
+            margin-top: var(--space-4);
+        }
+        
+        .rationale-list {
+            list-style: none;
+            padding: 0;
+            margin: var(--space-16) 0;
+        }
+        
+        .rationale-item {
+            padding: var(--space-8);
+            background: var(--color-secondary);
+            border-radius: var(--radius-sm);
+            margin: var(--space-4) 0;
+            border-left: 3px solid var(--color-primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="py-16">
+            <h1 class="text-center">Cancer Survival Prediction Companion</h1>
+            <p class="text-center" style="font-size: var(--font-size-lg); color: var(--color-text-secondary); margin-top: var(--space-8);">A compassionate tool for palliative care planning</p>
+            
+            <div class="memorial-note">
+                <p style="font-style: italic; margin: 0;">In loving memory of Anita Basavaraj Naragund (1968-2025)</p>
+                <p style="font-size: var(--font-size-sm); margin-top: var(--space-8); margin-bottom: 0;">Created to provide comfort &amp; guidance during life's most challenging moments</p>
+            </div>
+            
+            <div class="disclaimer">
+                <p style="margin: 0;"><strong>Important:</strong> This tool provides time windows for comfort-care planning only, not medical advice. Always consult with your healthcare team for medical decisions.</p>
+            </div>
+        </header>
+
+        <!-- Input Form Section -->
+        <section class="form-section">
+            <h2 style="margin-bottom: var(--space-24);">Current Observations</h2>
+            <p style="color: var(--color-text-secondary); margin-bottom: var(--space-24);">Please fill out based on what you can observe at home. All fields are optional - provide only what you're comfortable sharing.</p>
+            
+            <form id="predictionForm">
+                <div class="two-column">
+                    <div class="form-group">
+                        <label class="form-label" for="dyspnoea">Breathlessness Level</label>
+                        <select class="form-control" id="dyspnoea" name="dyspnoea">
+                            <option value="0">0 - No breathlessness</option>
+                            <option value="1">1 - Only on exertion</option>
+                            <option value="2">2 - When walking on level ground</option>
+                            <option value="3">3 - After just a few steps</option>
+                            <option value="4">4 - Even at rest</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Speech-Triggered Breathlessness</label>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="speechBreathless" name="speechBreathless">
+                            <label for="speechBreathless">Gets breathless when talking</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="two-column">
+                    <div class="form-group">
+                        <label class="form-label" for="coughPerDay">Cough Episodes Per Day</label>
+                        <input type="number" class="form-control" id="coughPerDay" name="coughPerDay" min="0" max="100" placeholder="Number of episodes">
+                        <div class="scale-description">Count noticeable coughing fits</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="vomitsPerDay">Vomiting Episodes Per Day</label>
+                        <input type="number" class="form-control" id="vomitsPerDay" name="vomitsPerDay" min="0" max="20" placeholder="Number of episodes">
+                        <div class="scale-description">Any amount of vomiting counts as one episode</div>
+                    </div>
+                </div>
+                
+                <div class="two-column">
+                    <div class="form-group">
+                        <label class="form-label" for="daysNoFood">Days Without Solid Food</label>
+                        <input type="number" class="form-control" id="daysNoFood" name="daysNoFood" min="0" max="30" placeholder="Number of days">
+                        <div class="scale-description">Count consecutive days with no solid food intake</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Can Take Oral Medications</label>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="oralMeds" name="oralMeds" checked>
+                            <label for="oralMeds">Able to swallow pills/liquid medications</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="two-column">
+                    <div class="form-group">
+                        <label class="form-label" for="daysNoBowel">Days Without Bowel Movement</label>
+                        <input type="number" class="form-control" id="daysNoBowel" name="daysNoBowel" min="0" max="21" placeholder="Number of days">
+                        <div class="scale-description">Consecutive days without a bowel movement</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="urine24h">Urine Output (24 hours) - Optional</label>
+                        <input type="number" class="form-control" id="urine24h" name="urine24h" min="0" max="5000" placeholder="ml (if known)">
+                        <div class="scale-description">Approximate amount in milliliters, if measurable</div>
+                    </div>
+                </div>
+                
+                <div class="two-column">
+                    <div class="form-group">
+                        <label class="form-label" for="painScore">Pain Level (0-10 scale)</label>
+                        <input type="range" class="form-control" id="painScore" name="painScore" min="0" max="10" value="0">
+                        <div style="display: flex; justify-content: space-between; font-size: var(--font-size-xs); color: var(--color-text-secondary); margin-top: var(--space-4);">
+                            <span>0 - No pain</span>
+                            <span id="painValue">0</span>
+                            <span>10 - Worst pain</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Bone Metastasis</label>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="boneMet" name="boneMet">
+                            <label for="boneMet">Doctor mentioned cancer spread to bones</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="petSuv">PET SUVmax for Bone - Advanced/Optional</label>
+                    <input type="number" class="form-control" id="petSuv" name="petSuv" min="0" max="50" step="0.1" placeholder="Value from PET scan report (if available)">
+                    <div class="scale-description">This is a technical value from PET scan reports - leave blank if not available</div>
+                </div>
+                
+                <button type="submit" class="btn btn--primary btn--lg btn--full-width" style="margin-top: var(--space-24);">
+                    Get Guidance
+                </button>
+            </form>
+        </section>
+
+        <!-- Loading State -->
+        <div id="loadingState" class="loading-state hidden">
+            <p>Calculating guidance...</p>
+            <div style="margin: var(--space-16) auto; width: 40px; height: 40px; border: 3px solid var(--color-secondary); border-top: 3px solid var(--color-primary); border-radius: 50%; animation: spin 1s linear infinite;"></div>
+        </div>
+
+        <!-- Prediction Results -->
+        <div id="predictionResults" class="hidden">
+            <section class="prediction-result">
+                <h2 style="margin-bottom: var(--space-16);">Time Window Guidance</h2>
+                <p style="color: var(--color-text-secondary); margin-bottom: var(--space-24);">Based on the current observations, here are the likelihood windows for comfort care planning:</p>
+                
+                <div id="timeWindows"></div>
+                
+                <div class="confidence-indicator">
+                    <span style="font-size: var(--font-size-sm); font-weight: var(--font-weight-medium);">Confidence Level:</span>
+                    <div class="confidence-dots" id="confidenceDots"></div>
+                    <span id="confidenceText" style="font-size: var(--font-size-sm); color: var(--color-text-secondary);"></span>
+                </div>
+                
+                <div style="margin-top: var(--space-20);">
+                    <h3 style="margin-bottom: var(--space-12); color: var(--color-primary);">Key Observations</h3>
+                    <ul id="rationaleList" class="rationale-list"></ul>
+                </div>
+            </section>
+            
+            <div class="emergency-contact">
+                <h3 style="color: var(--color-error); margin-bottom: var(--space-12);">Call Healthcare Team Immediately If:</h3>
+                <ul style="margin: 0; padding-left: var(--space-20);">
+                    <li>New severe air hunger with panic or distress</li>
+                    <li>Blue lips or fingernails (new onset)</li>
+                    <li>Choking or inability to clear secretions</li>
+                    <li>Any sudden, concerning changes in condition</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Comfort Measures Section -->
+        <section class="comfort-measures">
+            <h2 style="margin-bottom: var(--space-16); color: var(--color-success);">Comfort &amp; Care Measures</h2>
+            <p style="margin-bottom: var(--space-20);">These gentle measures can help provide comfort and dignity:</p>
+            
+            <div class="two-column" style="margin-bottom: var(--space-24);">
+                <div>
+                    <h3 style="margin-bottom: var(--space-12);">For Easier Breathing</h3>
+                    <ul class="comfort-list">
+                        <li>Elevate head of bed to 30-45 degrees using 3-4 pillows</li>
+                        <li>Open window for fresh air circulation</li>
+                        <li>Place small fan on low, directed toward face 12-18 inches away</li>
+                        <li>Loosen tight clothing around neck and chest</li>
+                        <li>Stay present and speak calmly - your calm helps them</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 style="margin-bottom: var(--space-12);">Comfortable Positions</h3>
+                    <ul class="comfort-list">
+                        <li>Semi-sitting back supported, knees slightly bent</li>
+                        <li>Leaning forward over bedside table with pillow</li>
+                        <li>Side-lying with pillow between knees</li>
+                        <li>Let them choose what feels most comfortable</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="background: rgba(var(--color-success-rgb), 0.1); padding: var(--space-16); border-radius: var(--radius-md); border: 1px solid rgba(var(--color-success-rgb), 0.3);">
+                <h4 style="margin-bottom: var(--space-12); color: var(--color-success);">Remember:</h4>
+                <p style="margin: 0;">Your presence, love, and gentle care are the most important gifts you can provide. Trust your instincts and don't hesitate to reach out to your healthcare team for guidance.</p>
+            </div>
+        </section>
+
+        <!-- Footer Section -->
+        <footer class="footer-section">
+            <h3 style="text-align: center; margin-bottom: var(--space-24);">Support Resources in India</h3>
+            
+            <div class="support-resources">
+                <div class="resource-card">
+                    <h4 style="color: var(--color-primary); margin-bottom: var(--space-8);">iCall Psychosocial Helpline</h4>
+                    <p style="margin-bottom: var(--space-8);"><strong>Phone:</strong> 9152987821</p>
+                    <p style="margin: 0; color: var(--color-text-secondary);">Monday-Saturday, 8am-10pm</p>
+                </div>
+                
+                <div class="resource-card">
+                    <h4 style="color: var(--color-primary); margin-bottom: var(--space-8);">NIMHANS Tele MANAS</h4>
+                    <p style="margin-bottom: var(--space-8);"><strong>Phone:</strong> 14416 or 1-800-891-4416</p>
+                    <p style="margin: 0; color: var(--color-text-secondary);">24/7 Mental Health Support</p>
+                </div>
+                
+                <div class="resource-card">
+                    <h4 style="color: var(--color-primary); margin-bottom: var(--space-8);">Connecting Foundation</h4>
+                    <p style="margin-bottom: var(--space-8);"><strong>Service:</strong> Grief Counseling</p>
+                    <p style="margin: 0;"><a href="https://connectingfoundation.org" target="_blank">connectingfoundation.org</a></p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: var(--space-32); padding-top: var(--space-24); border-top: 1px solid var(--color-card-border);">
+                <p style="color: var(--color-text-secondary); font-size: var(--font-size-sm); margin-bottom: var(--space-8);">🔒 All data stays on your device - nothing is sent to any server</p>
+                <p style="color: var(--color-text-secondary); font-size: var(--font-size-sm); margin: 0;">Open source tool created with love and compassion</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Prediction logic weights and configuration
+        const predictionConfig = {
+            weights: {
+                dyspnoea_grade: 0.9,
+                speech_breathlessness: 0.8,
+                cough_per_day: 0.4,
+                vomits_per_day: 0.6,
+                days_no_solid_intake: 0.7,
+                oral_meds_tolerated: -0.8,
+                days_no_bowel: 0.6,
+                urine_ml_24h: -0.3,
+                pain_score: 0.3,
+                bone_met: 0.2,
+                pet_suvmax_bone: 0.1
+            },
+            timeWindows: ["0-3 days", "4-7 days", "8-14 days", ">14 days"],
+            rationaleTriggersThresholds: {
+                severe_constipation: 7,
+                no_solid_intake: 2,
+                frequent_vomiting: 2,
+                high_cough: 10,
+                severe_breathlessness: 3
+            }
+        };
+
+        // Update pain score display
+        const painScore = document.getElementById('painScore');
+        const painValue = document.getElementById('painValue');
+        painScore.addEventListener('input', (e) => {
+            painValue.textContent = e.target.value;
+        });
+
+        // Form submission handler
+        document.getElementById('predictionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            document.getElementById('loadingState').classList.remove('hidden');
+            document.getElementById('predictionResults').classList.add('hidden');
+            
+            // Simulate processing time for better UX
+            setTimeout(() => {
+                calculatePrediction();
+                document.getElementById('loadingState').classList.add('hidden');
+                document.getElementById('predictionResults').classList.remove('hidden');
+                document.getElementById('predictionResults').scrollIntoView({ behavior: 'smooth' });
+            }, 1500);
+        });
+
+        function calculatePrediction() {
+            // Collect form data
+            const formData = {
+                dyspnoea_grade: parseInt(document.getElementById('dyspnoea').value) || 0,
+                speech_breathlessness: document.getElementById('speechBreathless').checked ? 1 : 0,
+                cough_per_day: parseInt(document.getElementById('coughPerDay').value) || 0,
+                vomits_per_day: parseInt(document.getElementById('vomitsPerDay').value) || 0,
+                days_no_solid_intake: parseInt(document.getElementById('daysNoFood').value) || 0,
+                oral_meds_tolerated: document.getElementById('oralMeds').checked ? 1 : 0,
+                days_no_bowel: parseInt(document.getElementById('daysNoBowel').value) || 0,
+                urine_ml_24h: parseInt(document.getElementById('urine24h').value) || 1000, // Default to normal if not provided
+                pain_score: parseInt(document.getElementById('painScore').value) || 0,
+                bone_met: document.getElementById('boneMet').checked ? 1 : 0,
+                pet_suvmax_bone: parseFloat(document.getElementById('petSuv').value) || 0
+            };
+
+            // Calculate weighted score
+            let totalScore = 0;
+            let maxPossibleScore = 0;
+            
+            Object.keys(predictionConfig.weights).forEach(key => {
+                const weight = predictionConfig.weights[key];
+                let value = 0;
+                
+                switch(key) {
+                    case 'dyspnoea_grade':
+                        value = formData.dyspnoea_grade;
+                        maxPossibleScore += Math.abs(weight) * 4;
+                        break;
+                    case 'speech_breathlessness':
+                        value = formData.speech_breathlessness;
+                        maxPossibleScore += Math.abs(weight) * 1;
+                        break;
+                    case 'cough_per_day':
+                        value = Math.min(formData.cough_per_day / 10, 1); // Normalize to 0-1
+                        maxPossibleScore += Math.abs(weight) * 1;
+                        break;
+                    case 'vomits_per_day':
+                        value = Math.min(formData.vomits_per_day / 5, 1); // Normalize to 0-1
+                        maxPossibleScore += Math.abs(weight) * 1;
+                        break;
+                    case 'days_no_solid_intake':
+                        value = Math.min(formData.days_no_solid_intake / 7, 1); // Normalize to 0-1
+                        maxPossibleScore += Math.abs(weight) * 1;
+                        break;
+                    case 'oral_meds_tolerated':
+                        value = formData.oral_meds_tolerated;
+                        maxPossibleScore += Math.abs(weight) * 1;
+                        break;
+                    case 'days_no_bowel':
+                        value = Math.min(formData.days_no_bowel / 7, 1); // Normalize to 0-1
+                        maxPossibleScore += Math.abs(weight) * 1;
+                        break;
+                    case 'urine_ml_24h':
+                        value = Math.max(0, (1000 - formData.urine_ml_24h) / 1000); // Lower urine = higher score
+                        maxPossibleScore += Math.abs(weight) * 1;
+                        break;
+                    case 'pain_score':
+                        value = formData.pain_score / 10; // Normalize to 0-1
+                        maxPossibleScore += Math.abs(weight) * 1;
+                        break;
+                    case 'bone_met':
+                        value = formData.bone_met;
+                        maxPossibleScore += Math.abs(weight) * 1;
+                        break;
+                    case 'pet_suvmax_bone':
+                        value = Math.min(formData.pet_suvmax_bone / 10, 1); // Normalize
+                        maxPossibleScore += Math.abs(weight) * 1;
+                        break;
+                }
+                
+                totalScore += weight * value;
+            });
+
+            // Normalize score to 0-1 range
+            const normalizedScore = Math.max(0, Math.min(1, (totalScore + maxPossibleScore * 0.5) / maxPossibleScore));
+            
+            // Calculate probabilities for time windows
+            const probabilities = calculateTimeWindowProbabilities(normalizedScore);
+            
+            // Generate rationale
+            const rationale = generateRationale(formData);
+            
+            // Calculate confidence
+            const confidence = calculateConfidence(formData, normalizedScore);
+            
+            // Display results
+            displayResults(probabilities, rationale, confidence);
+        }
+
+        function calculateTimeWindowProbabilities(score) {
+            // Convert normalized score to time window probabilities
+            // Higher score = shorter time window more likely
+            
+            let probs = [0, 0, 0, 0]; // 0-3, 4-7, 8-14, >14 days
+            
+            if (score > 0.8) {
+                probs = [0.7, 0.25, 0.05, 0.0];
+            } else if (score > 0.6) {
+                probs = [0.4, 0.4, 0.15, 0.05];
+            } else if (score > 0.4) {
+                probs = [0.2, 0.35, 0.35, 0.1];
+            } else if (score > 0.2) {
+                probs = [0.1, 0.25, 0.4, 0.25];
+            } else {
+                probs = [0.05, 0.15, 0.3, 0.5];
+            }
+            
+            return probs;
+        }
+
+        function generateRationale(formData) {
+            const reasons = [];
+            const thresholds = predictionConfig.rationaleTriggersThresholds;
+            
+            if (formData.days_no_bowel >= thresholds.severe_constipation) {
+                reasons.push('Severe constipation: ≥7 days without bowel movement indicates significant decline');
+            }
+            
+            if (formData.days_no_solid_intake >= thresholds.no_solid_intake) {
+                reasons.push('Extended period without solid food intake suggests decreased appetite and function');
+            }
+            
+            if (formData.oral_meds_tolerated === 0) {
+                reasons.push('Inability to take oral medications indicates swallowing difficulties');
+            }
+            
+            if (formData.vomits_per_day >= thresholds.frequent_vomiting) {
+                reasons.push('Frequent vomiting episodes suggest digestive system complications');
+            }
+            
+            if (formData.dyspnoea_grade >= thresholds.severe_breathlessness) {
+                reasons.push('Severe breathlessness indicates respiratory system strain');
+            }
+            
+            if (formData.cough_per_day >= thresholds.high_cough) {
+                reasons.push('Frequent coughing episodes may indicate respiratory complications');
+            }
+            
+            if (formData.speech_breathlessness) {
+                reasons.push('Speech-triggered breathlessness shows significant respiratory limitation');
+            }
+            
+            if (formData.pain_score >= 7) {
+                reasons.push('High pain levels require careful management for comfort');
+            }
+            
+            if (reasons.length === 0) {
+                reasons.push('Current symptoms suggest a more stable phase with time for comfort planning');
+            }
+            
+            return reasons;
+        }
+
+        function calculateConfidence(formData, score) {
+            // Calculate confidence based on number of significant symptoms
+            let significantSymptoms = 0;
+            
+            if (formData.dyspnoea_grade >= 2) significantSymptoms++;
+            if (formData.speech_breathlessness) significantSymptoms++;
+            if (formData.vomits_per_day >= 1) significantSymptoms++;
+            if (formData.days_no_solid_intake >= 1) significantSymptoms++;
+            if (!formData.oral_meds_tolerated) significantSymptoms++;
+            if (formData.days_no_bowel >= 3) significantSymptoms++;
+            if (formData.pain_score >= 5) significantSymptoms++;
+            
+            if (significantSymptoms >= 5) return 'High';
+            if (significantSymptoms >= 3) return 'Moderate';
+            return 'Lower';
+        }
+
+        function displayResults(probabilities, rationale, confidence) {
+            // Display time windows
+            const timeWindowsContainer = document.getElementById('timeWindows');
+            timeWindowsContainer.innerHTML = '';
+            
+            const maxProbIndex = probabilities.indexOf(Math.max(...probabilities));
+            
+            predictionConfig.timeWindows.forEach((window, index) => {
+                const windowDiv = document.createElement('div');
+                windowDiv.className = `time-window ${index === maxProbIndex ? 'highest' : ''}`;
+                
+                const probability = Math.round(probabilities[index] * 100);
+                
+                windowDiv.innerHTML = `
+                    <span style="font-weight: var(--font-weight-medium);">${window}</span>
+                    <span>${probability}%</span>
+                `;
+                
+                const probabilityBar = document.createElement('div');
+                probabilityBar.className = 'probability-bar';
+                
+                const probabilityFill = document.createElement('div');
+                probabilityFill.className = 'probability-fill';
+                probabilityFill.style.width = `${probability}%`;
+                
+                probabilityBar.appendChild(probabilityFill);
+                windowDiv.appendChild(probabilityBar);
+                
+                timeWindowsContainer.appendChild(windowDiv);
+            });
+            
+            // Display confidence
+            const confidenceDots = document.getElementById('confidenceDots');
+            const confidenceText = document.getElementById('confidenceText');
+            
+            confidenceDots.innerHTML = '';
+            const confidenceLevels = { 'Lower': 2, 'Moderate': 3, 'High': 5 };
+            const dotsCount = confidenceLevels[confidence] || 2;
+            
+            for (let i = 0; i < 5; i++) {
+                const dot = document.createElement('div');
+                dot.className = `confidence-dot ${i < dotsCount ? 'filled' : ''}`;
+                confidenceDots.appendChild(dot);
+            }
+            
+            confidenceText.textContent = confidence + ' confidence';
+            
+            // Display rationale
+            const rationaleList = document.getElementById('rationaleList');
+            rationaleList.innerHTML = '';
+            
+            rationale.forEach(reason => {
+                const listItem = document.createElement('li');
+                listItem.className = 'rationale-item';
+                listItem.textContent = reason;
+                rationaleList.appendChild(listItem);
+            });
+        }
+
+        // Add CSS animation for loading spinner
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
