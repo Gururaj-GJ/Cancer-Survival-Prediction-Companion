@@ -1,28 +1,41 @@
-# Cancer Survival Prediction Companion
+# 🌿 Cancer Survival Prediction Companion
 
-[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
-[![Not for Clinical Use](https://img.shields.io/badge/⚠️_Not_for_Clinical_Use-Educational_Only-red.svg)](https://github.com/Gururaj-GJ/Cancer-Survival-Prediction-Companion)
-[![Privacy](https://img.shields.io/badge/Privacy-No_Data_Storage-blue.svg)](https://github.com/Gururaj-GJ/Cancer-Survival-Prediction-Companion)
-[![Offline](https://img.shields.io/badge/Works-Offline-brightgreen.svg)](https://github.com/Gururaj-GJ/Cancer-Survival-Prediction-Companion)
+<p align="center">
+  <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="MIT License" />
+  <img src="https://img.shields.io/badge/Status-Offline%20Capable-4c9?style=for-the-badge" alt="Offline capable" />
+  <img src="https://img.shields.io/badge/Scope-Not%20for%20Clinical%20Use-orange?style=for-the-badge" alt="Not for clinical use" />
+  <img src="https://img.shields.io/badge/Accessibility-WCAG%202.1%20AA-7957d5?style=for-the-badge" alt="WCAG 2.1" />
+</p>
+
+<p align="center">
+  <b>A compassionate tool for palliative care planning and survival prediction.</b><br/>
+  <sub>Built for education and research. Works fully offline.</sub>
+</p>
+
+---
 
 ## 📋 Table of Contents
-- [Project Overview](#-project-overview)
-- [How It Works](#-how-it-works)
-- [Technologies Used](#-technologies-used)
-- [Features](#-features)
-- [Installation](#-installation)
-- [A to Z Usage Guide](#-a-to-z-usage-guide)
-- [Code Structure](#-code-structure)
-- [Contributing](#-contributing)
-- [License](#-license)
-- [Credits](#-credits)
+
+- Project Overview
+- How It Works
+- Technologies Used
+- Features
+- Installation
+- A to Z Usage Guide
+- Code Structure
+- Contributing
+- License
+- Credits
+- Screenshots
+
+---
 
 ## 🎯 Project Overview
 
-Cancer Survival Prediction Companion is a compassionate web application designed to assist healthcare providers and patients in understanding cancer survival predictions based on clinical parameters. The tool combines machine learning predictions with empathetic guidance, focusing on improving quality of life and informed decision-making.
+Cancer Survival Prediction Companion is a web application that blends machine learning predictions with empathetic guidance to support informed, human-centered decision-making.
 
 ### Mission Statement
-To provide accurate, compassionate cancer survival predictions while maintaining human dignity and supporting informed healthcare decisions.
+To provide accurate, compassionate survival predictions while upholding dignity and supporting thoughtful healthcare conversations.
 
 ### Key Objectives
 - Deliver clinically relevant survival predictions
@@ -31,67 +44,72 @@ To provide accurate, compassionate cancer survival predictions while maintaining
 - Support healthcare providers in patient communication
 - Maintain ethical standards in medical AI applications
 
+---
+
 ## 🔍 How It Works
 
-The application uses a Random Forest machine learning model trained on comprehensive cancer patient data to predict 5-year survival outcomes based on:
+The application uses a Random Forest model trained on cancer patient data to predict 5-year survival based on patient and clinical parameters.
 
 ### Input Parameters
-1. **Age**: Patient's age at diagnosis
-2. **Gender**: Male/Female
-3. **BMI**: Body Mass Index
-4. **Smoking Status**: Never/Former/Current
-5. **Alcohol Consumption**: None/Low/Moderate/High
-6. **Cancer Type**: Lung/Breast/Colorectal/Prostate/Stomach
-7. **Cancer Stage**: Stage I/II/III/IV
-8. **Treatment Type**: Surgery/Chemotherapy/Radiation/Immunotherapy/Combination
-9. **Genetic Markers**: Mutation A/B/C/D/E
-10. **Comorbidities**: Number of additional conditions
-11. **Treatment Response**: Poor/Moderate/Good
-12. **Follow-up Frequency**: Monthly/Quarterly/Biannual/Annual
+1. Age (years)
+2. Gender
+3. BMI (Body Mass Index)
+4. Smoking Status
+5. Alcohol Consumption
+6. Cancer Type
+7. Cancer Stage (I–IV)
+8. Treatment Type
+9. Genetic Markers
+10. Comorbidities (count)
+11. Treatment Response
+12. Follow-up Frequency
 
 ### Prediction Process
-1. **Data Input**: Healthcare provider enters patient parameters
-2. **Preprocessing**: Input validation and formatting
-3. **ML Inference**: Random Forest model processes data
-4. **Result Interpretation**: Binary outcome (0: Not Surviving, 1: Surviving)
-5. **Guidance Generation**: Compassionate recommendations and resources
+1. Data Input: Provider enters parameters
+2. Preprocessing: Validation and formatting
+3. ML Inference: Random Forest classifier
+4. Result Interpretation: Binary outcome (0/1)
+5. Guidance Generation: Compassionate recommendations
+
+---
 
 ## 🛠️ Technologies Used
 
 ### Frontend
-- **HTML5**: Semantic structure
-- **CSS3**: Modern styling with gradients and animations
-- **JavaScript (ES6+)**: Interactive functionality
+- HTML5: Semantic structure
+- CSS3: Gradients and animations
+- JavaScript (ES6+): Interactivity
 
 ### Backend
-- **Python 3.8+**: Core logic
-- **Flask 2.0+**: Web framework
-- **scikit-learn**: Machine learning (Random Forest)
-- **NumPy & Pandas**: Data processing
+- Python 3.8+
+- Flask 2.0+
+- scikit-learn
+- NumPy & Pandas
 
 ### Model
-- **Algorithm**: Random Forest Classifier
-- **Training Data**: Synthetic cancer patient dataset
-- **Features**: 12 clinical parameters
-- **Output**: Binary survival prediction
+- Algorithm: Random Forest Classifier
+- Features: 12 clinical parameters
+- Output: Binary survival prediction
 
 ### Development
-- **VS Code**: IDE
-- **Git/GitHub**: Version control
-- **pip**: Package management
+- VS Code
+- Git/GitHub
+- pip
+
+---
 
 ## ✨ Features
 
 ### Core Functionality
-- 🎯 **ML-Powered Predictions**: Random Forest model for survival analysis
-- 📊 **12-Parameter Input**: Comprehensive patient assessment
-- 💡 **Compassionate Guidance**: Supportive recommendations based on outcomes
-- 📱 **Responsive Design**: Mobile-first, works on all devices
-- ♿ **Accessibility**: WCAG 2.1 compliant (keyboard navigation, ARIA labels)
+- 🎯 ML-Powered Predictions
+- 📊 12-Parameter Input
+- 💡 Compassionate Guidance
+- 📱 Responsive Design
+- ♿ Accessibility (WCAG 2.1)
 
 ### User Experience
-- Clean, intuitive interface
-- Clear form validation
+- Clear, intuitive interface
+- Real-time form validation
 - Empathetic language and tone
 - Resource recommendations
 - Privacy-focused design
@@ -99,18 +117,23 @@ The application uses a Random Forest machine learning model trained on comprehen
 ### Technical Features
 - RESTful API architecture
 - Real-time predictions
-- Error handling and validation
+- Robust error handling
 - Secure data processing
 - Model persistence (joblib)
+
+> Ethics Callout — Use Responsibly
+> - Not for clinical decision-making
+> - For education/research only
+> - Always consult licensed clinicians
+
+---
 
 ## 📥 Installation
 
 ### Prerequisites
-```bash
-Python 3.8 or higher
-pip (Python package installer)
-Git (for cloning)
-```
+- Python 3.8+  
+- pip  
+- Git
 
 ### Step 1: Clone Repository
 ```bash
@@ -118,7 +141,7 @@ git clone https://github.com/Gururaj-GJ/Cancer-Survival-Prediction-Companion.git
 cd Cancer-Survival-Prediction-Companion
 ```
 
-### Step 2: Create Virtual Environment (Recommended)
+### Step 2: Create Virtual Environment
 ```bash
 # Windows
 python -m venv venv
@@ -136,245 +159,179 @@ pip install -r requirements.txt
 
 ### Step 4: Verify Installation
 ```bash
-python --version  # Should be 3.8+
-pip list  # Check installed packages
+python --version   # Should be 3.8+
+pip list           # Verify packages
 ```
 
 ### Step 5: Run Application
 ```bash
 python app.py
 ```
-
-Access at: `http://127.0.0.1:5000`
+Access at: http://127.0.0.1:5000
 
 ### Troubleshooting
-- **Port conflict**: Modify `app.py` port if 5000 is in use
-- **Missing packages**: Run `pip install -r requirements.txt` again
-- **Python version**: Ensure Python 3.8+
-- **Model file**: Ensure `cancer_survival_model.pkl` exists
+- Port conflict: Change Flask port in app.py
+- Missing packages: Re-run pip install -r requirements.txt
+- Python version: Ensure 3.8+
+- Model file: Ensure cancer_survival_model.pkl exists
+
+---
 
 ## 📖 A to Z Usage Guide
 
 ### For Healthcare Providers
-
-#### Step 1: Access Application
-- Open browser: `http://127.0.0.1:5000`
-- Review disclaimer and ethical guidelines
-
-#### Step 2: Input Patient Data
-Fill all required fields:
-1. **Patient Demographics**
-   - Age (years)
-   - Gender (Male/Female)
-
-2. **Health Metrics**
-   - BMI (Body Mass Index)
-   - Smoking Status
-   - Alcohol Consumption
-
-3. **Clinical Information**
-   - Cancer Type
-   - Cancer Stage (I-IV)
-   - Treatment Type
-   - Genetic Markers
-
-4. **Treatment Details**
-   - Number of Comorbidities
-   - Treatment Response
-   - Follow-up Frequency
-
-#### Step 3: Submit & Review Prediction
-- Click "Predict Survival"
-- Review binary outcome:
-  - **Surviving**: Green indicator with supportive guidance
-  - **Not Surviving**: Compassionate messaging with palliative care resources
-
-#### Step 4: Patient Communication
-- Use results as discussion starting point
-- Provide context and support
-- Share resources and guidance
-- Encourage questions and concerns
+1) Access the app at http://127.0.0.1:5000 and review the disclaimer  
+2) Input patient data across Demographics, Health Metrics, Clinical Information, and Treatment Details  
+3) Click Predict Survival and review outcome and guidance  
+4) Use results to facilitate supportive conversations and share resources
 
 ### For Patients & Families
-
-#### Understanding Results
-- **Statistical Nature**: Predictions are estimates, not certainties
-- **Individual Variation**: Your journey is unique
-- **Professional Guidance**: Always consult your healthcare team
-
-#### Using Resources
-- Review recommended support services
-- Explore quality of life guidance
-- Connect with family resources
-- Ask questions to your medical team
+- Statistical Nature: Predictions are estimates, not certainties
+- Individual Variation: Every journey is unique
+- Professional Guidance: Always consult your healthcare team
+- Use Resources: Explore support and quality-of-life guidance
 
 ### Form Validation
-- All fields are required
-- Age: 0-120 years
-- BMI: 10-60 range
-- Comorbidities: 0-10 count
+- All fields required  
+- Age: 0–120  
+- BMI: 10–60  
+- Comorbidities: 0–10  
 - Real-time error messages
 
 ### Privacy & Security
-- No data storage
-- No personal information collected
-- Session-based processing only
+- No data storage  
+- No personal information collected  
+- Session-based processing only  
 - HIPAA-aware design principles
+
+> Safety Callout — Privacy First
+> - The tool processes data locally in-session  
+> - Avoid entering personally identifiable information
+
+---
 
 ## 📸 Screenshots
 
-![Main Interface - Mobile View](assets/images/Mobile-View-1.jpg)
-*Mobile-responsive interface for easy data input on any device*
+<p align="center">
+  <img src="assets/images/Mobile-View-1.jpg" alt="Main Interface - Mobile" width="32%" />
+  <img src="assets/images/Mobile-View-2.jpg" alt="Input Form - Mobile" width="32%" />
+  <img src="assets/images/Mobile-View-3.jpg" alt="Results - Mobile" width="32%" />
+</p>
+<p align="center">
+  <em>Mobile views: main interface, input form, results with compassionate guidance.</em>
+</p>
 
-![Input Form - Mobile View](assets/images/Mobile-View-2.jpg)
-*Comprehensive input form for patient assessment parameters*
+<p align="center">
+  <img src="assets/images/Laptop-View-1.jpg" alt="Desktop: Homepage and main interface" width="49%" />
+  <img src="assets/images/Laptop-View-2.jpg" alt="Desktop: Clinical input form" width="49%" />
+</p>
+<p align="center">
+  <img src="assets/images/Laptop-View-3.jpg" alt="Desktop: Survival and time window guidance" width="49%" />
+  <img src="assets/images/Laptop-View-4.jpg" alt="Desktop: Comfort, care, and support" width="49%" />
+</p>
+<p align="center">
+  <em>Desktop views: interface, form, results, and resources with comfortable margins.</em>
+</p>
 
-![Results Display - Mobile View](assets/images/Mobile-View-3.jpg)
-*Survival prediction results with compassionate guidance*
-
-![Care Resources - Mobile View](assets/images/Mobile-View-4.jpg)
-*Detailed care recommendations and quality of life considerations*
-
-![Support Information - Mobile View](assets/images/Mobile-View-5.jpg)
-*Additional support information and family guidance resources*
-
-![Desktop view: Homepage and main interface](assets/images/Laptop-View-1.jpg)
-*Laptop-View-1.jpg – Desktop view: Homepage and main interface*
-
-![Desktop view: Clinical input form](assets/images/Laptop-View-2.jpg)
-*Laptop-View-2.jpg – Desktop view: Clinical input form*
-
-![Desktop view: Survival and time window guidance results](assets/images/Laptop-View-3.jpg)
-*Laptop-View-3.jpg – Desktop view: Survival and time window guidance results*
-
-![Desktop view: Comfort, care, and support resources](assets/images/Laptop-View-4.jpg)
-*Laptop-View-4.jpg – Desktop view: Comfort, care, and support resources*
+---
 
 ## 📁 Code Structure
 
 ```
 Cancer-Survival-Prediction-Companion/
-│
-├── app.py                          # Flask application entry point
-├── cancer_survival_model.pkl       # Trained Random Forest model
-├── requirements.txt                # Python dependencies
-├── README.md                       # This file
-│
+├── app.py                  # Flask entry point
+├── cancer_survival_model.pkl
+├── requirements.txt
+├── README.md
 ├── templates/
-│   ├── index.html                 # Main application page
-│   └── result.html                # Prediction results page
-│
+│   ├── index.html          # Main page
+│   └── result.html         # Prediction results
 ├── static/
-│   ├── styles.css                 # Application styling
-│   └── script.js                  # Client-side logic
-│
+│   ├── styles.css          # Styling
+│   └── script.js           # Client logic
 └── assets/
-    └── images/                    # Screenshot assets
+    └── images/             # Screenshots
 ```
 
 ### Key Files
+- app.py: Routes, model loading, validation, responses
+- templates/index.html: Form, accessibility, responsive layout
+- templates/result.html: Display, conditional guidance, resources
+- static/styles.css: Design system, responsive, accessibility
+- static/script.js: Validation, interactivity, errors
 
-#### `app.py`
-- Flask routes and logic
-- Model loading and prediction
-- Input validation
-- Response formatting
-
-#### `templates/index.html`
-- Input form
-- Form validation
-- Accessibility features
-- Responsive design
-
-#### `templates/result.html`
-- Results display
-- Conditional guidance
-- Resource links
-- Support information
-
-#### `static/styles.css`
-- Modern gradient design
-- Responsive layouts
-- Accessibility styling
-- Animation effects
-
-#### `static/script.js`
-- Form validation
-- AJAX submission (if implemented)
-- Interactive elements
-- Error handling
+---
 
 ## 🤝 Contributing
 
 ### Ways to Contribute
-1. **Report Bugs**: Open issues for any problems
-2. **Suggest Features**: Propose compassionate enhancements
-3. **Improve Documentation**: Clarify instructions
-4. **Enhance Accessibility**: Improve WCAG compliance
-5. **Add Resources**: Suggest patient support links
+1. Report bugs  
+2. Suggest features  
+3. Improve documentation  
+4. Enhance accessibility  
+5. Add resources
 
-### Contribution Process
-1. **Fork the Repository**
-2. **Create Feature Branch**: `git checkout -b feature/YourFeature`
-3. **Commit Changes**: `git commit -m 'Add compassionate feature'`
-4. **Push to Branch**: `git push origin feature/YourFeature`
-5. **Test Thoroughly**: Ensure no regressions
-6. **Open a Pull Request**
+### Process
+1. Fork repo  
+2. Branch: git checkout -b feature/YourFeature  
+3. Commit: git commit -m "feat: add your feature"  
+4. Push: git push origin feature/YourFeature  
+5. Open a Pull Request
 
-### Contribution Guidelines
-- Maintain compassionate, supportive language
-- Ensure accessibility compliance
-- Test on multiple devices/browsers
-- Document all changes
-- Respect patient privacy and dignity
+### Guidelines
+- Compassionate, supportive language  
+- Accessibility compliance  
+- Cross-device testing  
+- Document changes  
+- Respect privacy
+
+---
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+MIT License — see LICENSE for details.
 
 ### Usage Terms
-- ✅ Free for educational purposes
-- ✅ Free for healthcare research
+- ✅ Free for educational and research purposes
 - ⚠️ Not FDA approved for clinical use
 - ⚠️ Requires professional medical oversight
 - ❌ Not a substitute for professional medical advice
 
-## 🙏 Credits
-
-### Development
-- **Created by**: Gururaj GJ
-- **Purpose**: Educational demonstration of ML in healthcare
-- **Inspiration**: Improving patient care through technology
-
-### Acknowledgments
-- scikit-learn community for ML frameworks
-- Healthcare professionals for domain expertise
-- Patients and families who inspire compassionate care
-
-### Disclaimer
-
-⚠️ **Important Medical Disclaimer**
-
-This tool is for **educational and informational purposes only**. It is NOT:
-- A replacement for professional medical advice
-- FDA approved or clinically validated
-- Suitable for making treatment decisions
-- Guaranteed to be accurate for any individual
-
-**Always consult qualified healthcare professionals** for:
-- Diagnosis and treatment planning
-- Medical decision-making
-- Cancer care management
-- Palliative care decisions
-
-The predictions provided are statistical estimates based on historical data and may not reflect individual outcomes. Every patient's journey is unique.
+> Ethics Callout — Human First
+> Behind every data point is a human being with hopes, fears, and loved ones.
 
 ---
 
-**Remember**: Behind every data point is a human being with hopes, fears, and loved ones. This tool aims to serve with compassion, accuracy, and respect for human dignity.
+## 🙏 Credits
 
-For questions, feedback, or collaboration: [
-- **Email**: gururaj.gj.guru@gmail.com
-- **LinkedIn**: [linkedin.com/in/gururaj-gj](https://www.linkedin.com/in/gururaj-gj/)
+### Development
+- Created by: Gururaj GJ  
+- Purpose: Educational demonstration of ML in healthcare  
+- Inspiration: Improving patient care through technology
 
-*Last Updated: October 2025*
+### Acknowledgments
+- scikit-learn community  
+- Healthcare professionals for domain expertise  
+- Patients and families who inspire compassionate care
+
+### Disclaimer
+⚠️ Important Medical Disclaimer  
+This tool is for educational and informational purposes only. It is NOT:  
+- A replacement for professional medical advice  
+- FDA approved or clinically validated  
+- Suitable for making treatment decisions  
+- Guaranteed to be accurate for any individual  
+
+Always consult qualified healthcare professionals for:  
+- Diagnosis and treatment planning  
+- Medical decision-making  
+- Cancer care management  
+- Palliative care decisions  
+
+---
+
+Contact  
+- Email: gururaj.gj.guru@gmail.com  
+- LinkedIn: https://www.linkedin.com/in/gururaj-gj/
+
+<sub>Last Updated: October 2025</sub>
